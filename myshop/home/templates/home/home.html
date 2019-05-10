@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        .card-img-top {
+            height: 50%;
+            width: auto;
+            border-top-left-radius: calc(.25rem - 1px);
+            border-top-right-radius: calc(.25rem - 1px);
+        }
+    </style>
+{% endblock %}
+
+{% comment %}
+{% block content %}
+        {% for object in object_list %}
+            <div class="card" style="height: 20rem; width: 18rem; display: inline-block; margin: 5px">
+                        <img src="{{ object.image.url }}" class="card-img-top" alt="Обложка">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object }}</h5>
+                            <a href="{% url 'book-detail-view' object.pk %}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+        {% endfor %}
+{% endblock %}
+{% endcomment %}
+
+{% block content %}
+        {% for object in object_list %}
+            <div class="card mb-3" style="width: 540px;">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ object.image.url }}" class="card-img" alt="Обложка">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object }}</h5>
+                            <h6 class="card-title">
+                                {% for author_name in object.author.all %}
+                                    {{ author_name }} <br>
+                                {% endfor %}
+                            </h6>
+                            <p class="card-text">Some text</p>
+                            <a href="{% url 'book-detail-view' object.pk %}" class="btn btn-primary">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}

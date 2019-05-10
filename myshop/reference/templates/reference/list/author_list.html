@@ -1,0 +1,13 @@
+{% extends "table_list.html" %}
+
+{% block create %}<a href="{% url 'author-create-view' %}" class="btn btn-success">Добавить автора</a>{% endblock %}
+
+{% block caption %} АВТОРЫ {% endblock %}
+
+{% block detail %}<a href="{% url 'author-detail-view' object.pk %}"> {{ object.first_name }} {{ object.last_name }}</a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'author-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'author-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'author-delete-view' object.pk %}">{% endblock %}

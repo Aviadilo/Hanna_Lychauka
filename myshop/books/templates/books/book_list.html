@@ -1,0 +1,15 @@
+{% extends "table_list.html" %}
+
+{% block title %}Books{% endblock %}
+
+{% block create %}<a href="{% url 'book-create-view' %}" class="btn btn-success">Добавить книгу</a>{% endblock %}
+
+{% block caption %} КНИГИ {% endblock %}
+
+{% block detail %}<a href="{% url 'book-detail-view' object.pk %}"> {{ object.name }} </a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'book-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'book-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'book-delete-view' object.pk %}">{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "table_list.html" %}
+
+{% block title %}Genre{% endblock %}
+
+{% block create %}<a href="{% url 'genre-create-view' %}" class="btn btn-success">Добавить жанр</a>{% endblock %}
+
+{% block caption %} ЖАНРЫ {% endblock %}
+
+{% block detail %}<a href="{% url 'genre-detail-view' object.pk %}"> {{ object.name }} </a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'genre-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'genre-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'genre-delete-view' object.pk %}">{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "table_list.html" %}
+
+{% block title %}Format{% endblock %}
+
+{% block create %}<a href="{% url 'format-create-view' %}" class="btn btn-success">Добавить формат</a>{% endblock %}
+
+{% block caption %} ФОРМАТЫ {% endblock %}
+
+{% block detail %}<a href="{% url 'format-detail-view' object.pk %}"> {{ object.size }} </a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'format-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'format-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'format-delete-view' object.pk %}">{% endblock %}

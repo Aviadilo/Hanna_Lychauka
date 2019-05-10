@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Publish</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style type="text/css">
+            table {
+                border: 5px;
+                width: 500px;
+            }
+            th, td {
+                padding: 7px;
+                border: 2px dotted grey
+            }
+            caption {
+                font-size: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <table  align="center" cellpadding="5px" >
+            <caption>ИЗДАТЕЛЬСТВА</caption>
+            <tr>
+                <th>Название</th>
+                <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+                <th>Страна</th>
+                <td>{{ object.country }}</td>
+            </tr>
+            <tr>
+                <th>Город</th>
+                <td>{{ object.city }}</td>
+            </tr>
+        </table>
+
+        <a href="{% url 'publish-update-view' object.pk %}" class="btn btn-primary">Update</a>
+        <a href="{% url 'publish-delete-view' object.pk %}" class="btn btn-danger">Delete</a>
+
+    </body>
+</html>

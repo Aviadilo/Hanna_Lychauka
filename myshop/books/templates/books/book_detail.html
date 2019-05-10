@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% load custom_filters %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block style %}
+    <style type="text/css">
+        td {
+            padding: 7px;
+        }
+        caption {
+            font-size: 2em;
+            color: black;
+            caption-side: top;
+        }
+    </style>
+{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <table  align="center" cellpadding="5px" >
+        <caption>{{ object.name }}</caption>
+        <tr>
+            <th>Автор</th>
+            <td>
+                {% for author_name in object.author.all %}
+                    {{ author_name }} <br>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Обложка</th>
+            <td height="200px">
+                <img src="{{ object.image.url }}" alt="Обложка книги" height="80%">
+            </td>
+        </tr>
+        <tr>
+            <th>Цена, BYN</th>
+            <td>{{ object.price }}</td>
+        </tr>
+        <tr>
+            <th>Серия</th>
+            <td>
+                {{ object.serie }}
+            </td>
+        </tr>
+        <tr>
+            <th>Жанр</th>
+            <td>
+                {% for genre_name in object.genre.all %}
+                    {{ genre_name }}<br>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <th>Год издания</th>
+            <td>{{ object.year }}</td>
+        </tr>
+        <tr>
+            <th>Кол-во страниц</th>
+            <td>{{ object.page }}</td>
+        </tr>
+        <tr>
+            <th>Переплет</th>
+            <td>{{ object.bind }}</td>
+        </tr>
+        <tr>
+            <th>Формат</th>
+            <td>{{ object.book_format }}</td>
+        </tr>
+        <tr>
+            <th>ISBN</th>
+            <td>{{ object.isbn }}</td>
+        </tr>
+        <tr>
+            <th>Вес, г</th>
+            <td>{{ object.weight }}</td>
+        </tr>
+        <tr>
+            <th>Возрастные ограничения</th>
+            <td>{{ object.age_limit }}</td>
+        </tr>
+        <tr>
+            <th>Издательство</th>
+            <td>{{ object.publish }}</td>
+        </tr>
+        <tr>
+            <th>Кол-во книг</th>
+            <td>{{ object.book_amount }}</td>
+        </tr>
+        <tr>
+            <th>Наличие</th>
+            <td>
+                {{ object.available|filter_available }}
+            </td>
+        </tr>
+        <tr>
+            <th>Рейтинг</th>
+            <td>{{ object.rate }}</td>
+        </tr>
+    </table>
+ {% endblock %}

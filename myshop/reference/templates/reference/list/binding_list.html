@@ -1,0 +1,15 @@
+{% extends "table_list.html" %}
+
+{% block title %}Binding{% endblock %}
+
+{% block create %}<a href="{% url 'binding-create-view' %}" class="btn btn-success">Добавить переплет</a>{% endblock %}
+
+{% block caption %} ПЕРЕПЛЕТЫ {% endblock %}
+
+{% block detail %}<a href="{% url 'binding-detail-view' object.pk %}"> {{ object.binding_type }} </a>{% endblock %}
+
+{% block detail_two %}<a href="{% url 'binding-detail-view' object.pk %}">{% endblock %}
+
+{% block update %}<a href="{% url 'binding-update-view' object.pk %}">{% endblock %}
+
+{% block delete %}<a href="{% url 'binding-delete-view' object.pk %}">{% endblock %}
