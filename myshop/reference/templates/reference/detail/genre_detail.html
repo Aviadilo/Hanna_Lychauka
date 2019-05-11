@@ -1,37 +1,11 @@
-{% extends "table_list.html" %}
+{% extends "reference/detail/ref_detail.html" %}
 
-{% block title %}Genre{% endblock %}
+{% block title %}Жанры{% endblock %}
 
-{% block style %}
-    <style type="text/css">
-        table {
-            border: 5px;
-            width: 500px;
-        }
-        th, td {
-            padding: 7px;
-            border: 2px dotted grey
-        }
-        caption {
-            font-size: 2em;
-        }
-    </style>
-{% endblock %}
-
-{% block form %}{% endblock %}
-
-{% block content %}
-
-    <table  align="center" cellpadding="5px" >
-        <caption>ЖАНРЫ</caption>
+{% block table %}
+    <caption>ЖАНРЫ</caption>
         <tr>
             <th>Название</th>
             <td>{{ object.name }}</td>
         </tr>
-    </table>
-
-    <a href="{% url 'genre-update-view' object.pk %}" class="btn btn-primary">Update</a>
-    <a href="{% url 'genre-delete-view' object.pk %}" class="btn btn-danger">Delete</a>
-    <input type="button" value="Back" onclick="history.back();" class="btn btn-secondary">
-
 {% endblock %}

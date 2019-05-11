@@ -22,30 +22,67 @@ class AuthorDetail(DetailView):
     model = Author
     template_name = 'reference/detail/author_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = 'author-update-view'
+        context['delete_url'] = 'author-delete-view'
+        return context
+
 
 class GenreDetail(DetailView):
     model = Genre
     template_name = 'reference/detail/genre_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = 'genre-update-view'
+        context['delete_url'] = 'genre-delete-view'
+        return context
 
 
 class SerieDetail(DetailView):
     model = Series
     template_name = 'reference/detail/series_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = 'serie-update-view'
+        context['delete_url'] = 'serie-delete-view'
+        return context
+
+
 
 class PublishDetail(DetailView):
     model = Publish
     template_name = 'reference/detail/publish_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = 'publish-update-view'
+        context['delete_url'] = 'publish-delete-view'
+        return context
 
 
 class BindingDetail(DetailView):
     model = Binding
     template_name = 'reference/detail/binding_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = 'binding-update-view'
+        context['delete_url'] = 'binding-delete-view'
+        return context
+
 
 class BookFormatDetail(DetailView):
     model = BookFormat
     template_name = 'reference/detail/bookformat_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['update_url'] = 'format-update-view'
+        context['delete_url'] = 'format-delete-view'
+        return context
 
 
 class AuthorList(ListView):

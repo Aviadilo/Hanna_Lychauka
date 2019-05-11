@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ title }}
 {% endblock %}
 
 {% block style %}
@@ -27,12 +26,8 @@
 
 {% block content %}
 
-    <table align="center" cellpadding="5px">
-        <caption>{{ title }}</caption>
-        <tr>
-            <th>Название</th>
-            <td>{{ object.name }}</td>
-        </tr>
+    <table  align="center" cellpadding="5px" >
+        {% block table %}{% endblock %}
     </table>
 
     <a href="{% url update_url object.pk %}" class="btn btn-primary">Update</a>

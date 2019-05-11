@@ -1,34 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Bindings</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <style type="text/css">
-            table {
-                border: 5px;
-                width: 500px;
-            }
-            th, td {
-                padding: 7px;
-                border: 2px dotted grey
-            }
-            caption {
-                font-size: 2em;
-            }
-        </style>
-    </head>
-    <body>
-        <table  align="center" cellpadding="5px" >
-            <caption>ПЕРЕПЛЕТЫ</caption>
-            <tr>
-                <th>Тип</th>
-                <td>{{ object.binding_type }}</td>
-            </tr>
-        </table>
+{% extends "reference/detail/ref_detail.html" %}
 
-        <a href="{% url 'binding-update-view' object.pk %}" class="btn btn-primary">Update</a>
-        <a href="{% url 'binding-delete-view' object.pk %}" class="btn btn-danger">Delete</a>
+{% block title %}Переплеты{% endblock %}
 
-    </body>
-</html>
+{% block table %}
+    <caption>ПЕРЕПЛЕТЫ</caption>
+        <tr>
+            <th>Тип</th>
+            <td>{{ object.binding_type }}</td>
+        </tr>
+{% endblock %}
