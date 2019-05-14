@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+from cart.views import *
 
 admin.autodiscover()
 
@@ -24,5 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('refs/', include('reference.urls')),
     path('books/', include('books.urls')),
-    path('', include('home.urls'))
+    path('', include('home.urls')),
+    path('cart/<int:pk>', AddProduct.as_view(), name='add-to-cart')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

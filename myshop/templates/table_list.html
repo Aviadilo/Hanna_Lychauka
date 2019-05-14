@@ -30,6 +30,11 @@
                                     {% block update %}{% endblock %}<img src="https://img.icons8.com/wired/20/000000/pencil.png"></a>
                                     {% block delete %}{% endblock %}<img src="https://img.icons8.com/ios/20/000000/close-window-filled.png"></a>
                                 </td>
+                                {% block cart %}
+                                    <td>
+                                        <a href="{% url 'add-to-cart' object.pk %}" class="btn btn-success">Add to cart</a>
+                                    </td>
+                                {% endblock %}
                             </tr>
                         {% endfor %}
                     </table>
