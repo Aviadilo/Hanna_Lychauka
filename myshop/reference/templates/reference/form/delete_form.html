@@ -9,8 +9,8 @@
         <form method="post">
                 {% csrf_token %}
                 <p>Are you sure you want to delete "{{ object }}"?</p>
-            <input type="submit" value="Delete" name="delete">
+            <input type="submit" value="Delete" name="delete" class="btn btn-danger">
+            <a href="{{ cancel_url }}" class="btn btn-secondary">No</a>
         </form>
-    <a href="{{ cancel_url }}" class="btn btn-secondary">No</a>
     </body>
 </html>

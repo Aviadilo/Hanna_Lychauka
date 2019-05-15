@@ -14,6 +14,9 @@ class AddProduct(UpdateView):
     def get_object(self, queryset=None):
         cart_id = self.request.session.get('cart_id')
         if self.request.user.is_anonymous:
+            # user_anon = User(username='Anonymous', is_staff = False, is_superuser = False)
+            # user_anon.save()
+            # cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': user_anon})
             cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': None})
         else:
             cart, created = Cart.objects.get_or_create(pk=cart_id, defaults={'user': self.request.user})
