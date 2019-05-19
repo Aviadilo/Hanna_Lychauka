@@ -17,8 +17,8 @@
 
 {% block content %}
     <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4">
+                <div class="col-3"></div>
+                <div class="col-6">
                     <table  align="center" cellspacing="5px">
                     <caption> {% block caption %} НАЗВАНИЕ СПРАВОЧНИКА {% endblock %} </caption>
                         {% for object in object_list %}
@@ -32,14 +32,14 @@
                                 </td>
                                 {% block cart %}
                                     <td>
-                                        <a href="{% url 'add-to-cart' object.pk %}" class="btn btn-success">Add to cart</a>
+                                        <a href="{% url 'add-to-cart' object.pk %}?next=/books/all" class="btn btn-light"><img src="https://img.icons8.com/doodle/36/000000/wheelbarrow.png"></a>
                                     </td>
                                 {% endblock %}
                             </tr>
                         {% endfor %}
                     </table>
                 </div>
-                <div class="col-4" align="right">{% block create %}{% endblock %}</div>
+                <div class="col-3" align="right">{% block create %}{% endblock %}</div>
             </div>
 {% endblock %}
 

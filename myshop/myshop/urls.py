@@ -23,8 +23,9 @@ admin.autodiscover()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('home.urls')),
     path('refs/', include('reference.urls')),
     path('books/', include('books.urls')),
-    path('', include('home.urls')),
-    path('cart/<int:pk>', AddProduct.as_view(), name='add-to-cart')
+    path('cart/', include('cart.urls')),
+    path('order/', include('order.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

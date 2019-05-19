@@ -23,7 +23,21 @@ class Cart(models.Model):
         auto_now_add=False)
 
     def __str__(self):
-        return "Корзина"
+        return "Корзина {} покупателя {}".format(self.pk, self.user)
+
+    @property
+    def books_in_cart_count(self):
+        total = 0
+        for product in self.user_cart.all():
+            total += product.quantity
+        return total
+
+    @property
+    def total_cart_price(self):
+        total = 0
+        for product in self.user_cart.all():
+            total += product.price_total
+        return total
 
     class Meta:
         verbose_name = 'Корзина'
@@ -46,7 +60,11 @@ class BookInCart(models.Model):
         auto_now_add=False)
 
     def __str__(self):
-        return "Товар"
+        return self.book.name
+
+    @property
+    def price_total(self):
+        return self.book.price * self.quantity
 
     class Meta:
         verbose_name = 'Товар'

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление в корзину{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <H3>Вы хотите добавить в корзину товар "{{ object.book.name }}"?</H3>
+        <form action="" method="POST">
+            {% load crispy_forms_tags %}
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="hidden" name="next" value="{{ next }}">
+            <button type="submit" class="btn btn-success">Добавить в корзину</button>
+            <a href="{% url 'book-list-view' %}" class="btn btn-danger">No</a>
+        </form>
+{% endblock %}

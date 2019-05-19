@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Заказ выполнен!{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <H2>Ваш заказ принят!</H2>
+        <table  align="center" cellpadding="5px" class="table">
+            <tr>
+                <th>Название</th>
+                <th>Авторы</th>
+                <th>Кол-во</th>
+                <th>Цена за книгу</th>
+                <th>Сумма за книги</th>
+            </tr>
+            {% for product in  object.cart.user_cart.all%}
+                    <tr>
+                        <td>
+                            {{ product.book.name }}
+                        </td>
+                        <td>
+                            {% for author_name in product.book.author.all %}
+                                {{ author_name }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            {{ product.quantity }}
+                        </td>
+                        <td>
+                            {{ product.book.price }}
+                        </td>
+                        <td>
+                            {{ product.price_total }}
+                        </td>
+                    </tr>
+            {% endfor %}
+            <tr>
+                <th>Итого к оплате:</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>{{ object.cart.total_cart_price }}</th>
+            </tr>
+            <tr>
+                <th>
+                    Адрес доставки:
+                </th>
+                <th colspan="4">{{ object.delivery_address }}</th>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

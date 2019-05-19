@@ -6,13 +6,15 @@
 
 {% block style %}
     <style type="text/css">
+        table {
+            margin: 15px;
+            width: 800px;
+        }
+        tr {
+            height: 15%;
+        }
         td {
             padding: 7px;
-        }
-        caption {
-            font-size: 2em;
-            color: black;
-            caption-side: top;
         }
     </style>
 {% endblock %}
@@ -20,46 +22,58 @@
 {% block form %}{% endblock %}
 
 {% block content %}
-    <table  align="center" cellpadding="5px" >
-        <caption>{{ object.name }}</caption>
+    <table align="center">
         <tr>
-            <th>Автор</th>
-            <td>
+            <td rowspan="5" width="300px" align="center"><img src="{{ object.image.url }}" alt="Обложка книги" width="auto" height="400px"></td>
+            <td height="15%"><h3>{{ object.name }}</h3></td>
+        </tr>
+        <tr>
+            <td height="70px">
                 {% for author_name in object.author.all %}
-                    {{ author_name }} <br>
-                {% endfor %}
+                            <h4>{{ author_name }}</h4>
+                        {% endfor %}
             </td>
         </tr>
         <tr>
-            <th>Обложка</th>
-            <td height="200px">
-                <img src="{{ object.image.url }}" alt="Обложка книги" height="80%">
+            <td height="70px">
+                <h3>{{ object.price }} BYN</h3>
             </td>
         </tr>
         <tr>
-            <th>Цена, BYN</th>
-            <td>{{ object.price }}</td>
+            <td height="70px">
+               <a href="{% url 'add-to-cart' object.pk %}" class="btn btn-primary">Положить в корзину<img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png"></a>
+            </td>
         </tr>
+        <tr>
+            <td height="120px">
+                Описание книги
+            </td>
+        </tr>
+    </table>
+    <table>
         <tr>
             <th>Серия</th>
-            <td>
-                {{ object.serie }}
-            </td>
+            <td>{{ object.serie }}</td>
         </tr>
         <tr>
             <th>Жанр</th>
-            <td>
-                {% for genre_name in object.genre.all %}
+            <td>{% for genre_name in object.genre.all %}
                     {{ genre_name }}<br>
                 {% endfor %}
             </td>
         </tr>
         <tr>
-            <th>Год издания</th>
-            <td>{{ object.year }}</td>
+            <th>Издательство</th>
+            <td>
+                {{ object.publish }}
+            </td>
         </tr>
         <tr>
-            <th>Кол-во страниц</th>
+            <th>Год издания</th>
+            <td>{{ object.year}}</td>
+        </tr>
+        <tr>
+            <th>Страниц</th>
             <td>{{ object.page }}</td>
         </tr>
         <tr>
@@ -75,16 +89,8 @@
             <td>{{ object.isbn }}</td>
         </tr>
         <tr>
-            <th>Вес, г</th>
+            <th>Вес, гр</th>
             <td>{{ object.weight }}</td>
-        </tr>
-        <tr>
-            <th>Возрастные ограничения</th>
-            <td>{{ object.age_limit }}</td>
-        </tr>
-        <tr>
-            <th>Издательство</th>
-            <td>{{ object.publish }}</td>
         </tr>
         <tr>
             <th>Кол-во книг</th>

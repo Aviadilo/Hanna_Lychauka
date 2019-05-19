@@ -2,8 +2,6 @@ from django.db import models
 from django.urls import reverse
 
 
-# Create your models here.
-
 class Author(models.Model):
     first_name = models.CharField("Фамилия", null=False, blank=False, max_length=30)
     last_name = models.CharField("Имя", null=True, blank=True, max_length=30)
@@ -77,3 +75,14 @@ class BookFormat(models.Model):
     class Meta:
         verbose_name = 'Формат'
         verbose_name_plural = 'Форматы'
+
+
+class OrderStatus(models.Model):
+    status_type = models.CharField("Статус", max_length=30)
+
+    def __str__(self):
+        return self.status_type
+
+    class Meta:
+        verbose_name = 'Статус'
+        verbose_name_plural = 'Статусы'
