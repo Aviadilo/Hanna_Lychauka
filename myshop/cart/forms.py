@@ -7,4 +7,4 @@ class AddBookForm(ModelForm):
     class Meta:
         model = BookInCart
         fields = ['cart', 'book', 'quantity']
-        widgets = {'book': forms.HiddenInput} # не показывать поле book в форме
+        widgets = {'cart': forms.HiddenInput, 'book': forms.HiddenInput} # не показывать поле book в форме

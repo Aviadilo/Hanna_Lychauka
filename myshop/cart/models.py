@@ -47,7 +47,7 @@ class Cart(models.Model):
 class BookInCart(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, verbose_name='Корзина', related_name='user_cart')
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Товар', related_name='book_in_cart')
-    quantity = models.IntegerField("Количество")
+    quantity = models.PositiveIntegerField("Количество")
 
     created_day = models.DateTimeField(
         "Дата внесения в корзину",

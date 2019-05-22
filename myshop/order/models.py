@@ -13,10 +13,29 @@ class Order(models.Model):
         verbose_name="Статус заказа",
         on_delete=models.PROTECT
     )
-    delivery_address = models.TextField(
-        "Адрес доставки",
+    delivery_city = models.CharField(
+        "Город",
         null=True,
-        blank=True
+        blank=True,
+        max_length=35
+    )
+    delivery_street = models.CharField(
+        "Улица",
+        null=True,
+        blank=True,
+        max_length=50
+    )
+    delivery_building = models.CharField(
+        "Дом",
+        null=True,
+        blank=True,
+        max_length=5
+    )
+    delivery_flat = models.CharField(
+        "Квартира",
+        null=True,
+        blank=True,
+        max_length=5
     )
     email = models.EmailField(
         verbose_name="Электронная почта",
@@ -27,7 +46,7 @@ class Order(models.Model):
     phone = models.CharField(
         verbose_name="Контактный телефон",
         help_text="+375-33-111-42-42",
-        max_length=17
+        max_length=17,
     )
     created_day = models.DateTimeField(
         "Дата внесения в корзину",

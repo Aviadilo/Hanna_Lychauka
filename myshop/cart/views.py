@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
+from django.views.generic import DeleteView
 from cart.models import BookInCart, Cart, User
 from books.models import Book
 from .forms import AddBookForm
@@ -59,9 +60,16 @@ class CartView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        checkout_form = CheckOutOrderForm()  # создать форму в приложении Order
+        checkout_form = CheckOutOrderForm()
         checkout_form.fields['cart'].initial = self.object
         checkout_form.fields['status'].initial = new_order_status
         context['form'] = checkout_form
-        print(context)
         return context
+
+
+class DeleteBookFromCart(DeleteView):
+    model = BookInCart
+    template_name = 'cart/delete-book.html'
+
+    def get_success_url(self):
+        return reverse_lazy('view-cart')

@@ -47,7 +47,20 @@
                 <th>
                     Адрес доставки:
                 </th>
-                <th colspan="4">{{ object.delivery_address }}</th>
+                <th colspan="4">
+                    {% if object.delivery_city %}
+                        {{ object.delivery_city }}
+                    {% endif %}
+                    {% if object.delivery_street %}
+                        , ул. {{ object.delivery_street }}
+                    {% endif %}
+                    {% if object.delivery_building %}
+                        , дом {{ object.delivery_building }}
+                    {% endif %}
+                    {% if object.delivery_flat %}
+                        , кв. {{ object.delivery_flat }}
+                    {% endif %}
+                </th>
             </tr>
         </table>
     </div>
