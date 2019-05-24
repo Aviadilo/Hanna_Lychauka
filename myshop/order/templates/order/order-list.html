@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <table  cellspacing="5px" class="table table-striped">
+            <caption> {% block caption %} ЗАКАЗЫ {% endblock %} </caption>
+            <tr>
+               <th>
+                   Пользователь
+               </th>
+                <th>
+                   Статус заказа
+               </th>
+                <th>
+                   Количество книг
+               </th>
+                <th>
+                   Общая стоимость заказа
+               </th>
+                <td>
+
+               </td>
+            </tr>
+            {% for object in object_list %}
+                <tr>
+                    <td>
+                        {{ object.cart.user }}
+                    </td>
+                    <td>
+                        {{ object.status }}
+                    </td>
+                    <td>
+                        {{ object.cart.books_in_cart_count }}
+                    </td>
+                    <td>
+                        {{ object.cart.total_cart_price }}
+                    </td>
+                    <td>
+                        <a href="{% url 'order-update' object.pk %}">Перейти</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

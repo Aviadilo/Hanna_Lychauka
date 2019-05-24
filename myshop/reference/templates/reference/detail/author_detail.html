@@ -1,6 +1,6 @@
 {% extends "reference/detail/ref_detail.html" %}
 
-{% block title %}Авторы{% endblock %}
+{% block title %}{{ object.first_name }} {{ object.last_name }}{% endblock %}
 
 {% block table %}
     <caption>Авторы</caption>

@@ -8,6 +8,7 @@ from .forms import AddBookForm
 from reference.models import OrderStatus
 from order.forms import CheckOutOrderForm
 from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login
 
 new_order_status = OrderStatus.objects.get(pk=1)  # у объекта с pk=1 лежит значение "Новый заказ"
 

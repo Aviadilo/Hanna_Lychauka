@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic import DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 from .forms import *
 from .models import *
@@ -17,6 +18,11 @@ def get_cancel_url(self, context):
 class ReferenceView(TemplateView):
     template_name = 'reference/references.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/all'
+        return context
+
 
 class AuthorDetail(DetailView):
     model = Author
@@ -26,6 +32,8 @@ class AuthorDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['update_url'] = 'author-update-view'
         context['delete_url'] = 'author-delete-view'
+        author_pk = self.kwargs.get('pk')
+        context['logout_redirect'] = '/refs/author/{}'.format(author_pk)
         return context
 
 
@@ -37,6 +45,8 @@ class GenreDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['update_url'] = 'genre-update-view'
         context['delete_url'] = 'genre-delete-view'
+        genre_pk = self.kwargs.get('pk')
+        context['logout_redirect'] = '/refs/genre/{}'.format(genre_pk)
         return context
 
 
@@ -48,6 +58,8 @@ class SerieDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['update_url'] = 'serie-update-view'
         context['delete_url'] = 'serie-delete-view'
+        serie_pk = self.kwargs.get('pk')
+        context['logout_redirect'] = '/refs/serie/{}'.format(serie_pk)
         return context
 
 
@@ -60,6 +72,8 @@ class PublishDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['update_url'] = 'publish-update-view'
         context['delete_url'] = 'publish-delete-view'
+        publish_pk = self.kwargs.get('pk')
+        context['logout_redirect'] = '/refs/publish/{}'.format(publish_pk)
         return context
 
 
@@ -71,6 +85,8 @@ class BindingDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['update_url'] = 'binding-update-view'
         context['delete_url'] = 'binding-delete-view'
+        binding_pk = self.kwargs.get('pk')
+        context['logout_redirect'] = '/refs/binding/{}'.format(binding_pk)
         return context
 
 
@@ -82,6 +98,8 @@ class BookFormatDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['update_url'] = 'format-update-view'
         context['delete_url'] = 'format-delete-view'
+        format_pk = self.kwargs.get('pk')
+        context['logout_redirect'] = '/refs/format/{}'.format(format_pk)
         return context
 
 
@@ -97,6 +115,11 @@ class AuthorList(ListView):
         else:
             return qs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/author'
+        return context
+
 
 class GenreList(ListView):
     model = Genre
@@ -109,6 +132,12 @@ class GenreList(ListView):
             return qs.filter(name__icontains=search)
         else:
             return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/genre'
+        return context
+
     # def get_context_data(self, **kwargs):
     #         context = super().get_context_data(**kwargs)
     #         context['search_name'] = SearchForm()
@@ -132,6 +161,11 @@ class SerieList(ListView):
         else:
             return qs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/serie'
+        return context
+
 
 class PublishList(ListView):
     model = Publish
@@ -144,6 +178,11 @@ class PublishList(ListView):
             return qs.filter(name__icontains=search)
         else:
             return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/publish'
+        return context
 
 
 class BindingList(ListView):
@@ -158,6 +197,11 @@ class BindingList(ListView):
         else:
             return qs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/binding'
+        return context
+
 
 class BookFormatList(ListView):
     model = BookFormat
@@ -171,11 +215,17 @@ class BookFormatList(ListView):
         else:
             return qs
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['logout_redirect'] = '/refs/format'
+        return context
 
-class AuthorCreate(CreateView):
+
+class AuthorCreate(PermissionRequiredMixin, CreateView):
     model = Author
     template_name = 'reference/form/create_form.html'
     form_class = AuthorForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -185,10 +235,11 @@ class AuthorCreate(CreateView):
         return reverse_lazy('author-create-view')
 
 
-class GenreCreate(CreateView):
+class GenreCreate(PermissionRequiredMixin, CreateView):
     model = Genre
     template_name = 'reference/form/create_form.html'
     form_class = GenreForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -198,10 +249,11 @@ class GenreCreate(CreateView):
         return reverse_lazy('genre-create-view')
 
 
-class SerieCreate(CreateView):
+class SerieCreate(PermissionRequiredMixin, CreateView):
     model = Series
     template_name = 'reference/form/create_form.html'
     form_class = SerieForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -211,10 +263,11 @@ class SerieCreate(CreateView):
         return reverse_lazy('serie-create-view')
 
 
-class PublishCreate(CreateView):
+class PublishCreate(PermissionRequiredMixin, CreateView):
     model = Publish
     template_name = 'reference/form/create_form.html'
     form_class = PublishForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -224,10 +277,11 @@ class PublishCreate(CreateView):
         return reverse_lazy('publish-create-view')
 
 
-class BindingCreate(CreateView):
+class BindingCreate(PermissionRequiredMixin, CreateView):
     model = Binding
     template_name = 'reference/form/create_form.html'
     form_class = BindingForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -237,10 +291,11 @@ class BindingCreate(CreateView):
         return reverse_lazy('binding-create-view')
 
 
-class BookFormatCreate(CreateView):
+class BookFormatCreate(PermissionRequiredMixin, CreateView):
     model = BookFormat
     template_name = 'reference/form/create_form.html'
     form_class = BookFormatForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -250,10 +305,11 @@ class BookFormatCreate(CreateView):
         return reverse_lazy('format-create-view')
 
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(PermissionRequiredMixin, UpdateView):
     model = Author
     template_name = 'reference/form/update_form.html'
     form_class = AuthorForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -261,10 +317,11 @@ class AuthorUpdate(UpdateView):
         return reverse_lazy('author-list-view')
 
 
-class GenreUpdate(UpdateView):
+class GenreUpdate(PermissionRequiredMixin, UpdateView):
     model = Genre
     template_name = 'reference/form/update_form.html'
     form_class = GenreForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -272,10 +329,11 @@ class GenreUpdate(UpdateView):
         return reverse_lazy('genre-list-view')
 
 
-class SerieUpdate(UpdateView):
+class SerieUpdate(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'reference/form/update_form.html'
     form_class = SerieForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -283,10 +341,11 @@ class SerieUpdate(UpdateView):
         return reverse_lazy('serie-list-view')
 
 
-class PublishUpdate(UpdateView):
+class PublishUpdate(PermissionRequiredMixin, UpdateView):
     model = Publish
     template_name = 'reference/form/update_form.html'
     form_class = PublishForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -294,10 +353,11 @@ class PublishUpdate(UpdateView):
         return reverse_lazy('publish-list-view')
 
 
-class BindingUpdate(UpdateView):
+class BindingUpdate(PermissionRequiredMixin, UpdateView):
     model = Binding
     template_name = 'reference/form/update_form.html'
     form_class = BindingForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -305,10 +365,11 @@ class BindingUpdate(UpdateView):
         return reverse_lazy('binding-list-view')
 
 
-class BookFormatUpdate(UpdateView):
+class BookFormatUpdate(PermissionRequiredMixin, UpdateView):
     model = BookFormat
     template_name = 'reference/form/update_form.html'
     form_class = BookFormatForm
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -316,9 +377,10 @@ class BookFormatUpdate(UpdateView):
         return reverse_lazy('format-list-view')
 
 
-class AuthorDelete(DeleteView):
+class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model = Author
     template_name = 'reference/form/delete_form.html'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         return reverse_lazy('author-list-view')
@@ -328,9 +390,10 @@ class AuthorDelete(DeleteView):
         return get_cancel_url(self, context)
 
 
-class GenreDelete(DeleteView):
+class GenreDelete(PermissionRequiredMixin, DeleteView):
     model = Genre
     template_name = 'reference/form/delete_form.html'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         return reverse_lazy('genre-list-view')
@@ -340,9 +403,10 @@ class GenreDelete(DeleteView):
         return get_cancel_url(self, context)
 
 
-class SerieDelete(DeleteView):
+class SerieDelete(PermissionRequiredMixin, DeleteView):
     model = Series
     template_name = 'reference/form/delete_form.html'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         return reverse_lazy('serie-list-view')
@@ -352,9 +416,10 @@ class SerieDelete(DeleteView):
         return get_cancel_url(self, context)
 
 
-class PublishDelete(DeleteView):
+class PublishDelete(PermissionRequiredMixin, DeleteView):
     model = Publish
     template_name = 'reference/form/delete_form.html'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         return reverse_lazy('publish-list-view')
@@ -364,9 +429,10 @@ class PublishDelete(DeleteView):
         return get_cancel_url(self, context)
 
 
-class BindingDelete(DeleteView):
+class BindingDelete(PermissionRequiredMixin, DeleteView):
     model = Binding
     template_name = 'reference/form/delete_form.html'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         return reverse_lazy('binding-list-view')
@@ -376,9 +442,10 @@ class BindingDelete(DeleteView):
         return get_cancel_url(self, context)
 
 
-class BookFormatDelete(DeleteView):
+class BookFormatDelete(PermissionRequiredMixin, DeleteView):
     model = BookFormat
     template_name = 'reference/form/delete_form.html'
+    permission_required = 'books.edit-content'
 
     def get_success_url(self):
         return reverse_lazy('format-list-view')
