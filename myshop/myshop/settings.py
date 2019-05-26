@@ -135,6 +135,7 @@ USE_TZ = True
 LOGIN_REDIRECT_URL="/"
 LOGOUT_REDIRECT_URL='/'
 
+DEFAULT_FROM_EMAIL = 'zuzga@tut.by'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
