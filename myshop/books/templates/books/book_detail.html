@@ -41,7 +41,10 @@
         </tr>
         <tr>
             <td height="70px">
-               <a href="{% url 'add-to-cart' object.pk %}" class="btn btn-primary">Положить в корзину<img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png"></a>
+                {% if object.available %}
+                    <a href="{% url 'add-to-cart' object.pk %}" class="btn btn-primary">Положить в корзину
+                        <img src="https://img.icons8.com/doodle/24/000000/wheelbarrow.png"></a>
+                {% endif %}
             </td>
         </tr>
         <tr>

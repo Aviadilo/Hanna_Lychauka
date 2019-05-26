@@ -30,8 +30,10 @@
         {% block table %}{% endblock %}
     </table>
 
-    <a href="{% url update_url object.pk %}" class="btn btn-primary">Update</a>
-    <a href="{% url delete_url object.pk %}" class="btn btn-danger">Delete</a>
-    <input type="button" value="Back" class="btn btn-secondary" onclick="history.back();">
+    {% if perms.books.edit_content %}
+        <a href="{% url update_url object.pk %}" class="btn btn-primary">Update</a>
+        <a href="{% url delete_url object.pk %}" class="btn btn-danger">Delete</a>
+        <input type="button" value="Back" class="btn btn-secondary" onclick="history.back();">
+    {% endif %}
 
 {% endblock %}

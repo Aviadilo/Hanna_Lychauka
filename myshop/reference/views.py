@@ -225,7 +225,7 @@ class AuthorCreate(PermissionRequiredMixin, CreateView):
     model = Author
     template_name = 'reference/form/create_form.html'
     form_class = AuthorForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -239,7 +239,7 @@ class GenreCreate(PermissionRequiredMixin, CreateView):
     model = Genre
     template_name = 'reference/form/create_form.html'
     form_class = GenreForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -253,7 +253,7 @@ class SerieCreate(PermissionRequiredMixin, CreateView):
     model = Series
     template_name = 'reference/form/create_form.html'
     form_class = SerieForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -267,7 +267,7 @@ class PublishCreate(PermissionRequiredMixin, CreateView):
     model = Publish
     template_name = 'reference/form/create_form.html'
     form_class = PublishForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -281,7 +281,7 @@ class BindingCreate(PermissionRequiredMixin, CreateView):
     model = Binding
     template_name = 'reference/form/create_form.html'
     form_class = BindingForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -295,7 +295,7 @@ class BookFormatCreate(PermissionRequiredMixin, CreateView):
     model = BookFormat
     template_name = 'reference/form/create_form.html'
     form_class = BookFormatForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -309,7 +309,7 @@ class AuthorUpdate(PermissionRequiredMixin, UpdateView):
     model = Author
     template_name = 'reference/form/update_form.html'
     form_class = AuthorForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -321,7 +321,7 @@ class GenreUpdate(PermissionRequiredMixin, UpdateView):
     model = Genre
     template_name = 'reference/form/update_form.html'
     form_class = GenreForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -333,7 +333,7 @@ class SerieUpdate(PermissionRequiredMixin, UpdateView):
     model = Series
     template_name = 'reference/form/update_form.html'
     form_class = SerieForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -345,7 +345,7 @@ class PublishUpdate(PermissionRequiredMixin, UpdateView):
     model = Publish
     template_name = 'reference/form/update_form.html'
     form_class = PublishForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -357,7 +357,7 @@ class BindingUpdate(PermissionRequiredMixin, UpdateView):
     model = Binding
     template_name = 'reference/form/update_form.html'
     form_class = BindingForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -369,7 +369,7 @@ class BookFormatUpdate(PermissionRequiredMixin, UpdateView):
     model = BookFormat
     template_name = 'reference/form/update_form.html'
     form_class = BookFormatForm
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         if self.request.POST.get('detail'):
@@ -380,7 +380,7 @@ class BookFormatUpdate(PermissionRequiredMixin, UpdateView):
 class AuthorDelete(PermissionRequiredMixin, DeleteView):
     model = Author
     template_name = 'reference/form/delete_form.html'
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('author-list-view')
@@ -393,7 +393,7 @@ class AuthorDelete(PermissionRequiredMixin, DeleteView):
 class GenreDelete(PermissionRequiredMixin, DeleteView):
     model = Genre
     template_name = 'reference/form/delete_form.html'
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('genre-list-view')
@@ -406,7 +406,7 @@ class GenreDelete(PermissionRequiredMixin, DeleteView):
 class SerieDelete(PermissionRequiredMixin, DeleteView):
     model = Series
     template_name = 'reference/form/delete_form.html'
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('serie-list-view')
@@ -419,7 +419,7 @@ class SerieDelete(PermissionRequiredMixin, DeleteView):
 class PublishDelete(PermissionRequiredMixin, DeleteView):
     model = Publish
     template_name = 'reference/form/delete_form.html'
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('publish-list-view')
@@ -432,7 +432,7 @@ class PublishDelete(PermissionRequiredMixin, DeleteView):
 class BindingDelete(PermissionRequiredMixin, DeleteView):
     model = Binding
     template_name = 'reference/form/delete_form.html'
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('binding-list-view')
@@ -445,7 +445,7 @@ class BindingDelete(PermissionRequiredMixin, DeleteView):
 class BookFormatDelete(PermissionRequiredMixin, DeleteView):
     model = BookFormat
     template_name = 'reference/form/delete_form.html'
-    permission_required = 'books.edit-content'
+    permission_required = 'books.edit_content'
 
     def get_success_url(self):
         return reverse_lazy('format-list-view')

@@ -118,4 +118,4 @@ class Book(models.Model):
     class Meta:
         verbose_name = 'Книга'
         verbose_name_plural = 'Книги'
-        permissions = [('edit-content', 'for content-managers'), ('edit-order', 'for edit-managers'), ('market', 'for marketers')]
+        permissions = [('edit_content', 'content manager'), ('edit_order', 'order manager'), ('market', 'for marketers')]

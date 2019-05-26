@@ -43,6 +43,13 @@ class AddBookToCart(UpdateView):
         return context
 
     def get_success_url(self):
+        if self.request.POST.get('back'):
+            product = self.model.objects.get(pk=self.object.pk)
+            if product.quantity > 1:
+                product.quantity -= 1
+                product.save()
+            else:
+                product.delete()
         return self.request.POST.get('next', '/')
 
 

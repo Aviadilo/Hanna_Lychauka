@@ -26,14 +26,14 @@ class OrderSuccess(DetailView):
 class OrderList(PermissionRequiredMixin, ListView):
     model = Order
     template_name = 'order/order-list.html'
-    permission_required = 'books.edit-order'
+    permission_required = 'books.edit_order'
 
 
 class OrderUpdate(PermissionRequiredMixin, UpdateView):
     model = Order
     template_name = 'order/order-update.html'
     fields = ['status']
-    permission_required = 'books.edit-order'
+    permission_required = 'books.edit_order'
 
     def get_success_url(self):
         return reverse_lazy('order-list')

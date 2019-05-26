@@ -5,13 +5,18 @@
 {% block form %}{% endblock %}
 
 {% block content %}
-    <H3>Вы хотите добавить в корзину товар "{{ object.book.name }}"?</H3>
+    <H3>Вы хотите добавить в корзину товар "{{ object.book.name }}"? {{ object }} {{ object.pk }} {{ object.book.pk }}</H3>
         <form action="" method="POST">
             {% load crispy_forms_tags %}
             {% csrf_token %}
             {{ form.as_p }}
             <input type="hidden" name="next" value="{{ next }}">
+            {% comment %}
             <button type="submit" class="btn btn-success">Добавить в корзину</button>
+            <button type="submit" class="btn btn-danger" name="do_not_add">Нет</button>
             <a href="{% url 'book-list-view' %}" class="btn btn-danger">No</a>
+            {% endcomment %}
+            <input type="submit" value="Add" name="add">
+            <input type="submit" value="No" name="back">
         </form>
 {% endblock %}

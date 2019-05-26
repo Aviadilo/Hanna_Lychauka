@@ -25,20 +25,27 @@
                     </li>
                 </ul>
 
+                {% if perms.books.edit_order %}
+                    <a href="{% url 'order-list' %}" class="btn btn-success ml-sm-2 mr-sm-2">Все заказы</a>
+                {% endif %}
 
                 {% if user.is_authenticated %}
-                Welcome, {{ user }}!
-                <a href="{% url 'log-out' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}" class="btn btn-primary ml-sm-2 mr-sm-2">Log out</a>
+                    Welcome, {{ user }}!
+                    <a href="{% url 'log-out' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}"
+                       class="btn btn-primary ml-sm-2 mr-sm-2">Log out</a>
                 {% endif %}
                 {% if user.is_anonymous %}
-                <a href="{% url 'log-in' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}" class="btn btn-primary ml-sm-2 mr-sm-2">Log in</a>
+                    <a href="{% url 'log-in' %}{% if logout_redirect %}?next={{ logout_redirect }}{% endif %}"
+                       class="btn btn-primary ml-sm-2 mr-sm-2">Log in</a>
                 {% endif %}
 
                 {% block form %}
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" name="name" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-0 my-sm-0" type="submit"><img src="https://img.icons8.com/dusk/20/000000/detective.png" alt="Search"></button>
-                </form>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="search" name="name" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success my-0 my-sm-0" type="submit">
+                            <img src="https://img.icons8.com/dusk/20/000000/detective.png" alt="Search">
+                        </button>
+                    </form>
                 {% endblock %}
 
                 <a href="{% url 'view-cart' %}" class="btn btn-warning ml-sm-2">Моя корзина ({{ quantity }})</a>
