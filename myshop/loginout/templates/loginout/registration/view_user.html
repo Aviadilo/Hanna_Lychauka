@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block style %}
+{% endblock %}
+
+{% block title %}
+    Профиль пользователя {{ object.username }}
+{% endblock %}
+
+{% block form %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Ваш профиль</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Логин</th>
+                <td>{{ object.username }}</td>
+            </tr>
+            <tr>
+                <th>Фамиля</th>
+                <td>{{ object.first_name }}</td>
+            </tr>
+            <tr>
+                <th>Имя</th>
+                <td>{{ object.last_name }}</td>
+            </tr>
+            <tr>
+                <th>E-mail</th>
+                <td>{{ object.email }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

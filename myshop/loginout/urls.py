@@ -10,4 +10,5 @@ urlpatterns = [
     #      PasswordResetView.as_view(), name='password_reset_confirm'),
     path('create-user', CreateUser.as_view(), name='create-user'),
     path('update-user/<int:pk>', UpdateUser.as_view(), name='update-user'),
+    path('view-user/<int:pk>', ViewUser.as_view(), name='view-user'),
 ]

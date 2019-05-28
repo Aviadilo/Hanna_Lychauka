@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import views as auth_views
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.detail import DetailView
 from cart.models import User
 from django.urls import reverse_lazy
 from .forms import CreateUserForm, UpdateUserForm
@@ -48,4 +49,9 @@ class UpdateUser(UpdateView):
     form_class = UpdateUserForm
 
     def get_success_url(self):
-        return reverse_lazy('book-list-view')
+        return reverse_lazy('view-user', kwargs={'pk': self.object.pk})
+
+
+class ViewUser(DetailView):
+    model = User
+    template_name = "loginout/registration/view_user.html"
