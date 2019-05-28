@@ -1,4 +1,5 @@
 from django.db import models
+from cart.models import User
 
 class CommentToBook(models.Model):
     commented_book = models.ForeignKey(
@@ -10,6 +11,13 @@ class CommentToBook(models.Model):
 
     comment_to_book = models.TextField(
         "Комментарий к книге"
+    )
+
+    commented_user = models.ForeignKey(
+        User,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE
     )
 
     created_day = models.DateTimeField(
