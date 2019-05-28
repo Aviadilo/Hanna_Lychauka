@@ -46,7 +46,8 @@ MY_APPS = [
     'books',
     'cart',
     'order',
-    'loginout'
+    'loginout',
+    'comments'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + MY_APPS
