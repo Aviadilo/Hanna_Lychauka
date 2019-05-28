@@ -30,5 +30,6 @@
                 <td>{{ object.email }}</td>
             </tr>
         </table>
+        <a href="{% url 'update-user' user.pk %}" class="btn btn-primary">Редактировать профиль</a>
     </div>
 {% endblock %}

@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from cart.models import User
 from django.urls import reverse_lazy
 from .forms import CreateUserForm, UpdateUserForm
+from django.contrib.auth.mixins import UserPassesTestMixin
 
 
 class LoginView(auth_views.LoginView):
@@ -43,15 +44,22 @@ class CreateUser(CreateView):
         return self.request.POST.get('next', '/')
 
 
-class UpdateUser(UpdateView):
+class UpdateUser(UserPassesTestMixin, UpdateView):
     model = User
     template_name = "loginout/registration/update_user.html"
     form_class = UpdateUserForm
 
     def get_success_url(self):
+        print(self.object)
         return reverse_lazy('view-user', kwargs={'pk': self.object.pk})
 
+    def test_func(self):
+        return self.request.user.pk == self.kwargs.get('pk')
 
-class ViewUser(DetailView):
+
+class ViewUser(UserPassesTestMixin, DetailView):
     model = User
     template_name = "loginout/registration/view_user.html"
+
+    def test_func(self):
+        return self.request.user.pk == self.kwargs.get('pk')
