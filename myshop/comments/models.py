@@ -1,6 +1,7 @@
 from django.db import models
 from cart.models import User
 
+
 class CommentToBook(models.Model):
     commented_book = models.ForeignKey(
         "books.Book",
@@ -26,7 +27,7 @@ class CommentToBook(models.Model):
         auto_now_add=True)
 
     def __str__(self):
-        return "Коммент"
+        return "Коммент пользователя {} о книге {}".format(self.commented_user, self.commented_book)
 
     class Meta:
         verbose_name = 'Комментарий'

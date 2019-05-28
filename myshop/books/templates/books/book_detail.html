@@ -53,6 +53,12 @@
             </td>
         </tr>
     </table>
+    <p>Только зарегистрированные пользователи могут оставлять комментарии</p>
+    <p>
+        {% for comment in object.commented_book.all %}
+            {{ comment.comment_to_book }}<br>
+        {% endfor %}
+    </p>
     <table>
         <tr>
             <th>Серия</th>
