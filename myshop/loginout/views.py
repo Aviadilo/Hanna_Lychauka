@@ -3,7 +3,7 @@ from django.contrib.auth import views as auth_views
 from django.views.generic.edit import CreateView, UpdateView
 from cart.models import User
 from django.urls import reverse_lazy
-from .forms import CreateUserForm
+from .forms import CreateUserForm, UpdateUserForm
 
 
 class LoginView(auth_views.LoginView):
@@ -40,3 +40,12 @@ class CreateUser(CreateView):
         self.object.set_password(self.object.password)
         self.object.save()
         return self.request.POST.get('next', '/')
+
+
+class UpdateUser(UpdateView):
+    model = User
+    template_name = "loginout/registration/update_user.html"
+    form_class = UpdateUserForm
+
+    def get_success_url(self):
+        return reverse_lazy('book-list-view')
