@@ -22,6 +22,7 @@
 {% block form %}{% endblock %}
 
 {% block content %}
+<div class="container">
     <table align="center">
         <tr>
             <td rowspan="5" width="300px" align="center"><img src="{{ object.image.url }}" alt="Обложка книги" width="auto" height="400px"></td>
@@ -54,11 +55,12 @@
         </tr>
     </table>
     <p>Только зарегистрированные пользователи могут оставлять комментарии</p>
-    <p>
-        {% for comment in object.commented_book.all %}
-            {{ comment.comment_to_book }}<br>
-        {% endfor %}
-    </p>
+    {% if object.commented_book.all %}
+        <div class="card" style="width: 35rem;">
+            <p>{{ object.commented_book.all.0.comment_to_book }}</p>
+            <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ object.commented_book.all.0.commented_user }}</h6>
+        </div>
+    {% endif %}
     <table>
         <tr>
             <th>Серия</th>
@@ -116,4 +118,16 @@
             <td>{{ object.rate }}</td>
         </tr>
     </table>
+    <h4>Все комментарии</h4>
+    {% if object.commented_book.all %}
+        {% for comment in object.commented_book.all %}
+            <div class="card" style="width: 50rem; margin: 1rem";>
+                <p>{{ comment.comment_to_book }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ comment.commented_user }}</h6>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>На эту книгу нет ни одного комментария. Вы можете оставить его первым!</p>
+    {% endif %}
+</div>
  {% endblock %}
