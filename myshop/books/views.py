@@ -8,6 +8,7 @@ from .models import Book
 from cart.models import Cart
 from django.urls import reverse_lazy
 from .forms import BookForm
+from comments.forms import CommentCreateForm
 
 
 class BookList(ListView):
@@ -39,8 +40,11 @@ class BookDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        book_pk = self.kwargs.get('pk')
-        context['logout_redirect'] = '/books/book/{}'.format(book_pk)
+        context['logout_redirect'] = '/books/book/{}'.format(self.object.pk)
+        checkout_form = CommentCreateForm()
+        checkout_form.fields['commented_book'].initial = self.object
+        checkout_form.fields['commented_user'].initial = self.request.user
+        context['form'] = checkout_form
         return context
 
 
