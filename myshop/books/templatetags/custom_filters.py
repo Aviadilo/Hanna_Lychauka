@@ -9,3 +9,8 @@ def filter_available(value):
         return "В наличии"
     else:
         return "Нет в наличии"
+
+
+@register.filter
+def ordered_comments(value):
+    return value.order_by('-created_day')

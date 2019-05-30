@@ -57,8 +57,11 @@
     <p>Только зарегистрированные пользователи могут оставлять комментарии</p>
     {% if object.commented_book.all %}
         <div class="card" style="width: 35rem;">
-            <p>{{ object.commented_book.all.0.comment_to_book }}</p>
-            <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ object.commented_book.all.0.commented_user }}</h6>
+            {% with last_comment=object.commented_book.all|ordered_comments %}
+                <p>{{ last_comment.0.comment_to_book }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ last_comment.commented_user }},
+                {{ last_comment.0.created_day|date:"j E Y, G:i" }}</h6>
+            {% endwith %}
         </div>
     {% endif %}
     <table>
@@ -119,16 +122,15 @@
         </tr>
     </table>
     <h4>Все комментарии</h4>
-    {% if object.commented_book.all %}
-        {% for comment in object.commented_book.all %}
+        {% for comment in object.commented_book.all|ordered_comments %}
             <div class="card" style="width: 50rem; margin: 1rem";>
                 <p>{{ comment.comment_to_book }}</p>
-                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ comment.commented_user }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ comment.commented_user }},
+                    {{ comment.created_day|date:"j E Y, G:i" }}</h6>
             </div>
+        {% empty %}
+            <p>На эту книгу нет ни одного комментария. Вы можете оставить его первым!</p>
         {% endfor %}
-    {% else %}
-        <p>На эту книгу нет ни одного комментария. Вы можете оставить его первым!</p>
-    {% endif %}
 </div>
 {% if user.is_authenticated %}
     <form action="{% url 'comment-create' %}" method="POST">
