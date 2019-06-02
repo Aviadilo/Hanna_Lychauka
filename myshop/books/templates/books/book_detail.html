@@ -23,6 +23,7 @@
 
 {% block content %}
 <div class="container">
+{% load crispy_forms_tags %}
     <table align="center">
         <tr>
             <td rowspan="5" width="300px" align="center"><img src="{{ object.image.url }}" alt="Обложка книги" width="auto" height="400px"></td>
@@ -59,7 +60,7 @@
         <div class="card" style="width: 35rem;">
             {% with last_comment=object.commented_book.all|ordered_comments %}
                 <p>{{ last_comment.0.comment_to_book }}</p>
-                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ last_comment.commented_user }},
+                <h6 class="card-subtitle mb-2 text-muted">Пользователь {{ last_comment.0.commented_user }},
                 {{ last_comment.0.created_day|date:"j E Y, G:i" }}</h6>
             {% endwith %}
         </div>
@@ -131,12 +132,12 @@
         {% empty %}
             <p>На эту книгу нет ни одного комментария. Вы можете оставить его первым!</p>
         {% endfor %}
+    {% if user.is_authenticated %}
+        <form action="{% url 'comment-create' %}" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Оставить комментарий" class="btn btn-primary">
+        </form>
+    {% endif %}
 </div>
-{% if user.is_authenticated %}
-    <form action="{% url 'comment-create' %}" method="POST">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Оставить комментарий" class="btn btn-primary">
-    </form>
-{% endif %}
  {% endblock %}
