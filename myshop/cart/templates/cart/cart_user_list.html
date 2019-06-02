@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Заказы{% endblock %}
+
+{% block content %}
+    <div class="container">
+    {% if object_list %}
+        <table  cellspacing="5px" class="table table-hover">
+            <tr>
+                <th>Дата создания заказа</th>
+                <th>Статус</th>
+                <th>Товары</th>
+                <th>Сумма заказа</th>
+            </tr>
+            {% for object in object_list %}
+                {% if object.order_cart.all %}
+                <tr>
+                    <td>
+                        {% for product in object.order_cart.all %}
+                            {{ product.created_day|date:"j E Y, G:i" }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for product in object.order_cart.all %}
+                            {{ product.status }}
+                        {% endfor %}
+                    </td>
+                    <td>
+                        {% for product in object.user_cart.all %}
+                            {{ product.book.name }}<br>
+                        {% endfor %}
+                    </td>
+                    <td>{{ object.total_cart_price }}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% else %}
+        <h1 align="center">У Вас еще нет ни одного заказа!</h1>
+    {% endif %}
+    </div>
+{% endblock %}

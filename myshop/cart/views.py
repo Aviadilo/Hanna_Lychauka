@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import UpdateView
 from django.views.generic import DeleteView
+from django.views.generic.list import ListView
 from cart.models import BookInCart, Cart, User
 from books.models import Book
 from .forms import AddBookForm
@@ -81,3 +82,13 @@ class DeleteBookFromCart(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('view-cart')
+
+
+class CartUserList(ListView):
+    model = Cart
+    template_name = 'cart/cart_user_list.html'
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset(**kwargs)
+        current_user = self.request.user
+        return qs.filter(user=current_user)

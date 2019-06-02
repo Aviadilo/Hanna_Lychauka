@@ -6,6 +6,7 @@ from reference.models import OrderStatus
 class Order(models.Model):
     cart = models.ForeignKey(
         Cart,
+        related_name= "order_cart",
         on_delete=models.PROTECT
     )
     status = models.ForeignKey(
