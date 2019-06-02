@@ -7,6 +7,7 @@
     {% if object_list %}
         <table  cellspacing="5px" class="table table-hover">
             <tr>
+                <th></th>
                 <th>Дата создания заказа</th>
                 <th>Статус</th>
                 <th>Товары</th>
@@ -15,16 +16,17 @@
             {% for object in object_list %}
                 {% if object.order_cart.all %}
                 <tr>
-                    <td>
-                        {% for product in object.order_cart.all %}
+                    {% for product in object.order_cart.all %}
+                        <td>
+                            <a href="{% url 'order-success' product.pk %}" class="btn btn-info ml-sm-2">Подробнее</a>
+                        </td>
+                        <td>
                             {{ product.created_day|date:"j E Y, G:i" }}
-                        {% endfor %}
-                    </td>
-                    <td>
-                        {% for product in object.order_cart.all %}
+                        </td>
+                        <td>
                             {{ product.status }}
-                        {% endfor %}
-                    </td>
+                        </td>
+                    {% endfor %}
                     <td>
                         {% for product in object.user_cart.all %}
                             {{ product.book.name }}<br>

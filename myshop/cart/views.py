@@ -10,6 +10,7 @@ from reference.models import OrderStatus
 from order.forms import CheckOutOrderForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 new_order_status = OrderStatus.objects.get(pk=1)  # у объекта с pk=1 лежит значение "Новый заказ"
 
@@ -84,9 +85,10 @@ class DeleteBookFromCart(DeleteView):
         return reverse_lazy('view-cart')
 
 
-class CartUserList(ListView):
+class CartUserList(LoginRequiredMixin, ListView):
     model = Cart
     template_name = 'cart/cart_user_list.html'
+    login_url = '/auth/login'
 
     def get_queryset(self, **kwargs):
         qs = super().get_queryset(**kwargs)
