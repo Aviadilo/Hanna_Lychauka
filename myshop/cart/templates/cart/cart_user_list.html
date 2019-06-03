@@ -26,8 +26,8 @@
                                 {{ product.created_day|date:"j E Y, G:i" }}
                             </td>
                             <td>
-                                {{ product.status }}<br>
-                                {{ product.canceled|filter_canceled }}
+                                {{ product.status }}
+                                <p class="text-danger font-weight-bold">{{ product.canceled|filter_canceled }}</p>
                             </td>
                         {% endfor %}
                         <td>

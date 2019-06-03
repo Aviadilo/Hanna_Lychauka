@@ -11,7 +11,4 @@ class LatestView(ListView):
 
     def get_queryset(self, **kwargs):
         qs = super().get_queryset(**kwargs)
-        search = self.request.GET.get('name', 0)
-        if search != 0:
-            return qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct()
         return qs.order_by('-updated_date')[0:3]

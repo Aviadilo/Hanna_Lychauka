@@ -9,19 +9,12 @@ from cart.models import Cart
 from django.urls import reverse_lazy
 from .forms import BookForm
 from comments.forms import CommentCreateForm
+from django.db.models import Q
 
 
 class BookList(ListView):
     model = Book
     template_name = 'books/book_list.html'
-
-    def get_queryset(self, **kwargs):
-        qs = super().get_queryset(**kwargs)
-        search = self.request.GET.get('name', 0)
-        if qs.filter(name__icontains=search).exists():
-            return qs.filter(name__icontains=search)
-        else:
-            return qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,3 +79,15 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('book-list-view')
+
+
+class BookSearch(ListView):
+    model = Book
+    template_name = 'books/book_search.html'
+
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset(**kwargs)
+        search = self.request.GET.get('search_book', 0)
+        if qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct().exists():
+            return qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct()
+        return qs

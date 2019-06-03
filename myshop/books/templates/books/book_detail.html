@@ -32,8 +32,8 @@
         <tr>
             <td height="70px">
                 {% for author_name in object.author.all %}
-                            <h4>{{ author_name }}</h4>
-                        {% endfor %}
+                    <h4>{{ author_name }}</h4>
+                {% endfor %}
             </td>
         </tr>
         <tr>
@@ -55,7 +55,7 @@
             </td>
         </tr>
     </table>
-    <p>Только зарегистрированные пользователи могут оставлять комментарии</p>
+    <p><em>Только зарегистрированные пользователи могут оставлять комментарии</em></p>
     {% if object.commented_book.all %}
         <div class="card" style="width: 35rem;">
             {% with last_comment=object.commented_book.all|ordered_comments %}
