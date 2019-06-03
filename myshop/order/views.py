@@ -42,3 +42,18 @@ class OrderUpdate(PermissionRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('order-list')
+
+
+class OrderCanceled(UpdateView):
+    model = Order
+    template_name = 'order/order-canceled.html'
+    fields = ['canceled']
+
+    def get_success_url(self):
+        self.object.canceled = True
+        self.object.save()
+        return reverse_lazy('cart-user-list')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context

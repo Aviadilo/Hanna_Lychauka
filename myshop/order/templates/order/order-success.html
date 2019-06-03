@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="container">
-        <H2>Ваш заказ принят!</H2>
+        <H2>Ваш заказ:</H2>
         <table  align="center" cellpadding="5px" class="table">
             <tr>
                 <th>Название</th>
@@ -63,5 +63,8 @@
                 </th>
             </tr>
         </table>
+    {% if object.status.pk == 1 %}
+        <a href="{% url 'order-canceled' object.pk %}" class="btn btn-danger">Отменить заказ</a>
+    {% endif %}
     </div>
 {% endblock %}

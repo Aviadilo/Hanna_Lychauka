@@ -30,7 +30,7 @@
                 {% endif %}
 
                 {% if user.is_authenticated %}
-                    <div class="dropdown">
+                    <div class="dropdown mr-sm-2">
                         <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ user }}
                         </a>
@@ -52,7 +52,7 @@
 
                 {% block form %}
                     <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" name="name" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 " type="search" name="name" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-success my-0 my-sm-0" type="submit">
                             <img src="https://img.icons8.com/dusk/20/000000/detective.png" alt="Search">
                         </button>

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load custom_filters_cart %}
+
 {% block title %}Заказы{% endblock %}
 
 {% block content %}
@@ -15,25 +17,26 @@
             </tr>
             {% for object in object_list %}
                 {% if object.order_cart.all %}
-                <tr>
-                    {% for product in object.order_cart.all %}
-                        <td>
-                            <a href="{% url 'order-success' product.pk %}" class="btn btn-info ml-sm-2">Подробнее</a>
-                        </td>
-                        <td>
-                            {{ product.created_day|date:"j E Y, G:i" }}
-                        </td>
-                        <td>
-                            {{ product.status }}
-                        </td>
-                    {% endfor %}
-                    <td>
-                        {% for product in object.user_cart.all %}
-                            {{ product.book.name }}<br>
+                    <tr>
+                        {% for product in object.order_cart.all %}
+                            <td>
+                                <a href="{% url 'order-success' product.pk %}" class="btn btn-info ml-sm-2">Подробнее</a>
+                            </td>
+                            <td>
+                                {{ product.created_day|date:"j E Y, G:i" }}
+                            </td>
+                            <td>
+                                {{ product.status }}<br>
+                                {{ product.canceled|filter_canceled }}
+                            </td>
                         {% endfor %}
-                    </td>
-                    <td>{{ object.total_cart_price }}</td>
-                </tr>
+                        <td>
+                            {% for product in object.user_cart.all %}
+                                {{ product.book.name }}<br>
+                            {% endfor %}
+                        </td>
+                        <td>{{ object.total_cart_price }}</td>
+                    </tr>
                 {% endif %}
             {% endfor %}
         </table>
