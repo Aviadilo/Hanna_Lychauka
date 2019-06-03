@@ -9,46 +9,59 @@ class Order(models.Model):
         related_name= "order_cart",
         on_delete=models.PROTECT
     )
+
     status = models.ForeignKey(
         OrderStatus,
         verbose_name="Статус заказа",
         on_delete=models.PROTECT
     )
+
+    canceled = models.BooleanField(
+        "Отменен",
+        default = False
+    )
+
     delivery_city = models.CharField(
         "Город",
         null=True,
         blank=True,
         max_length=35
     )
+
     delivery_street = models.CharField(
         "Улица",
         null=True,
         blank=True,
         max_length=50
     )
+
     delivery_building = models.CharField(
         "Дом",
         null=True,
         blank=True,
         max_length=5
     )
+
     delivery_flat = models.CharField(
         "Квартира",
         null=True,
         blank=True,
         max_length=5
     )
+
     email = models.EmailField(
         verbose_name="Электронная почта",
         null=True,
         blank=True,
         help_text="very_good_user@mail.com"
     )
+
     phone = models.CharField(
         verbose_name="Контактный телефон",
         help_text="+375-33-111-42-42",
         max_length=17,
     )
+
     created_day = models.DateTimeField(
         "Дата внесения в корзину",
         auto_now=False,
