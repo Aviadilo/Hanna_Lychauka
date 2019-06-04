@@ -40,6 +40,12 @@ class Book(models.Model):
         blank=True,
         verbose_name="Жанр")
 
+    description = models.TextField(
+        "Описание",
+        blank=True,
+        null=True
+    )
+
     year = models.PositiveSmallIntegerField(
         "Год издания",
         null=True,

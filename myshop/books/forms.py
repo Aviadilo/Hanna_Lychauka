@@ -11,6 +11,7 @@ class BookForm(ModelForm):
                   'price',
                   'serie',
                   'genre',
+                  'description',
                   'year',
                   'page',
                   'bind',

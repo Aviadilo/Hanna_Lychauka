@@ -26,6 +26,13 @@ class BookList(ListView):
         context['logout_redirect'] = '/books/all'
         return context
 
+    def get_queryset(self, **kwargs):
+        qs = super().get_queryset(**kwargs)
+        search = self.request.GET.get('search_book', 0)
+        if qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct().exists():
+            return qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct()
+        return qs
+
 
 class BookDetail(DetailView):
     model = Book
@@ -79,15 +86,3 @@ class BookDelete(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('book-list-view')
-
-
-class BookSearch(ListView):
-    model = Book
-    template_name = 'books/book_search.html'
-
-    def get_queryset(self, **kwargs):
-        qs = super().get_queryset(**kwargs)
-        search = self.request.GET.get('search_book', 0)
-        if qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct().exists():
-            return qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct()
-        return qs

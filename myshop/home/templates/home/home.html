@@ -10,6 +10,9 @@
             border-top-left-radius: calc(.25rem - 1px);
             border-top-right-radius: calc(.25rem - 1px);
         }
+        .inline-block {
+            display: inline-block;
+        }
     </style>
 {% endblock %}
 
@@ -29,8 +32,9 @@
 
 {% block content %}
     Пользователь: {{ user }}
+    <div class="inline-block">
         {% for object in object_list %}
-            <div class="card mb-3" style="width: 540px;">
+            <div class="card mb-3" style="width: 500px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         <img src="{{ object.image.url }}" class="card-img" alt="Обложка">
@@ -43,11 +47,12 @@
                                     {{ author_name }} <br>
                                 {% endfor %}
                             </h6>
-                            <p class="card-text">Some text</p>
+                            <p class="card-text">{{ object.price }} BYN</p>
                             <a href="{% url 'book-detail-view' object.pk %}" class="btn btn-primary">Подробнее</a>
                         </div>
                     </div>
                 </div>
             </div>
         {% endfor %}
+    </div>
 {% endblock %}
