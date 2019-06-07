@@ -6,7 +6,11 @@
 
 {% block content %}
     <div class="container">
-        <H2>Ваш заказ:</H2>
+        <H2>Ваш заказ:
+            {% if object.canceled %}
+                <p class="text-danger font-weight-bold">ОТМЕНЕН</p>
+            {% endif %}
+        </H2>
         <table  align="center" cellpadding="5px" class="table">
             <tr>
                 <th>Название</th>
@@ -44,6 +48,9 @@
                 <th>{{ object.cart.total_cart_price }}</th>
             </tr>
             <tr>
+                <th></th><th></th><th></th><th></th><th></th>
+            </tr>
+            <tr>
                 <th>
                     Адрес доставки:
                 </th>
@@ -62,9 +69,17 @@
                     {% endif %}
                 </th>
             </tr>
+            <tr>
+                <th>Статус заказа:</th>
+                <td>{{ object.status }}</td>
+                <td></td>
+                <td></td>
+                <th></th>
+            </tr>
         </table>
-    {% if object.status.pk == 1 %}
+    {% if object.status.pk == 1 and object.canceled == False %}
         <a href="{% url 'order-canceled' object.pk %}" class="btn btn-danger">Отменить заказ</a>
     {% endif %}
+    <a href="{% url 'cart-user-list' %}" class="btn btn-primary">К списку заказов</a>
     </div>
 {% endblock %}

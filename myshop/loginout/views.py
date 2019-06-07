@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.detail import DetailView
 from cart.models import User
 from django.urls import reverse_lazy
-from .forms import CreateUserForm, UpdateUserForm
+from .forms import CreateUserForm, UpdateUserForm, UserCreationForm
 from django.contrib.auth.mixins import UserPassesTestMixin
 
 
@@ -32,6 +32,8 @@ class CreateUser(CreateView):
     model = User
     template_name = 'loginout/registration/create_user.html'
     form_class = CreateUserForm
+    # form_class = UserCreationForm
+    # success_url = reverse_lazy('log-in')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
