@@ -80,6 +80,8 @@
     {% if object.status.pk == 1 and object.canceled == False %}
         <a href="{% url 'order-canceled' object.pk %}" class="btn btn-danger">Отменить заказ</a>
     {% endif %}
-    <a href="{% url 'cart-user-list' %}" class="btn btn-primary">К списку заказов</a>
+    {% if user.is_authenticated %}
+        <a href="{% url 'cart-user-list' %}" class="btn btn-primary">К списку заказов</a>
+    {% endif %}
     </div>
 {% endblock %}

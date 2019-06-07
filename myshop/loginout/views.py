@@ -65,3 +65,12 @@ class ViewUser(UserPassesTestMixin, DetailView):
 
     def test_func(self):
         return self.request.user.pk == self.kwargs.get('pk')
+
+
+class PasswordChangeView(auth_views.PasswordChangeView):
+    template_name = 'loginout/registration/password_change_form.html'
+    success_url = reverse_lazy('change-password-done')
+
+
+class PasswordChangeDone(auth_views.PasswordChangeDoneView):
+    template_name = 'loginout/registration/password_change_done.html'
