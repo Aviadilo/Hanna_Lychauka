@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse_lazy
 from .forms import *
 from .models import *
+from books.views import book_quantity_in_cart
 
 
 def get_cancel_url(self, context):
@@ -21,6 +22,7 @@ class ReferenceView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/all'
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -34,6 +36,7 @@ class AuthorDetail(DetailView):
         context['delete_url'] = 'author-delete-view'
         author_pk = self.kwargs.get('pk')
         context['logout_redirect'] = '/refs/author/{}'.format(author_pk)
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -47,6 +50,7 @@ class GenreDetail(DetailView):
         context['delete_url'] = 'genre-delete-view'
         genre_pk = self.kwargs.get('pk')
         context['logout_redirect'] = '/refs/genre/{}'.format(genre_pk)
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -60,6 +64,7 @@ class SerieDetail(DetailView):
         context['delete_url'] = 'serie-delete-view'
         serie_pk = self.kwargs.get('pk')
         context['logout_redirect'] = '/refs/serie/{}'.format(serie_pk)
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -74,6 +79,7 @@ class PublishDetail(DetailView):
         context['delete_url'] = 'publish-delete-view'
         publish_pk = self.kwargs.get('pk')
         context['logout_redirect'] = '/refs/publish/{}'.format(publish_pk)
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -87,6 +93,7 @@ class BindingDetail(DetailView):
         context['delete_url'] = 'binding-delete-view'
         binding_pk = self.kwargs.get('pk')
         context['logout_redirect'] = '/refs/binding/{}'.format(binding_pk)
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -100,6 +107,7 @@ class BookFormatDetail(DetailView):
         context['delete_url'] = 'format-delete-view'
         format_pk = self.kwargs.get('pk')
         context['logout_redirect'] = '/refs/format/{}'.format(format_pk)
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -118,6 +126,7 @@ class AuthorList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/author'
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -136,17 +145,8 @@ class GenreList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/genre'
+        book_quantity_in_cart(self, context)
         return context
-
-    # def get_context_data(self, **kwargs):
-    #         context = super().get_context_data(**kwargs)
-    #         context['search_name'] = SearchForm()
-    #         search = self.request.GET.get('name', 0)
-    #         if context['object_list'].filter(name__icontains=search).exists():
-    #             context['object_list'] = context['object_list'].filter(name__icontains=search)
-    #             return context
-    #         else:
-    #             return context
 
 
 class SerieList(ListView):
@@ -164,6 +164,7 @@ class SerieList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/serie'
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -182,6 +183,7 @@ class PublishList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/publish'
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -200,6 +202,7 @@ class BindingList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/binding'
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -218,6 +221,7 @@ class BookFormatList(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['logout_redirect'] = '/refs/format'
+        book_quantity_in_cart(self, context)
         return context
 
 

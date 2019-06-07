@@ -31,19 +31,19 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 class CreateUser(CreateView):
     model = User
     template_name = 'loginout/registration/create_user.html'
-    form_class = CreateUserForm
-    # form_class = UserCreationForm
-    # success_url = reverse_lazy('log-in')
+    # form_class = CreateUserForm
+    form_class = UserCreationForm
+    success_url = reverse_lazy('log-in')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['next'] = self.request.GET.get('next', '/')
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['next'] = self.request.GET.get('next', '/')
+    #     return context
 
-    def get_success_url(self):
-        self.object.set_password(self.object.password)
-        self.object.save()
-        return self.request.POST.get('next', '/')
+    # def get_success_url(self):
+    #     self.object.set_password(self.object.password)
+    #     self.object.save()
+    #     return self.request.POST.get('next', '/')
 
 
 class UpdateUser(UserPassesTestMixin, UpdateView):

@@ -8,6 +8,7 @@ User = get_user_model()
 class Cart(models.Model):
     user = models.ForeignKey(
         User,
+        related_name='cart_of_user',
         blank=True,
         null=True,
         on_delete=models.PROTECT

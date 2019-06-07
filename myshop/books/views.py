@@ -12,18 +12,22 @@ from comments.forms import CommentCreateForm
 from django.db.models import Q
 
 
+def book_quantity_in_cart(self, context):
+    cart_id = self.request.session.get('cart_id', '0')
+    if cart_id != '0':
+        context['quantity'] = Cart.objects.get(pk=cart_id).books_in_cart_count
+    else:
+        context['quantity'] = cart_id
+    return context
+
 class BookList(ListView):
     model = Book
     template_name = 'books/book_list.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart_id = self.request.session.get('cart_id', '0')
-        if cart_id != '0':
-            context['quantity'] = Cart.objects.get(pk=cart_id).books_in_cart_count
-        else:
-            context['quantity'] = cart_id
         context['logout_redirect'] = '/books/all'
+        book_quantity_in_cart(self, context)
         return context
 
     def get_queryset(self, **kwargs):
@@ -45,6 +49,7 @@ class BookDetail(DetailView):
         checkout_form.fields['commented_book'].initial = self.object
         checkout_form.fields['commented_user'].initial = self.request.user
         context['form'] = checkout_form
+        book_quantity_in_cart(self, context)
         return context
 
 

@@ -129,14 +129,14 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 LOGIN_REDIRECT_URL="/"
 LOGOUT_REDIRECT_URL='/'
 
-DEFAULT_FROM_EMAIL = 'zuzga@tut.by'
+# DEFAULT_FROM_EMAIL = 'zuzga@tut.by'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'

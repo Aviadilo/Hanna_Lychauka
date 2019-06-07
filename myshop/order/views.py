@@ -26,7 +26,7 @@ class OrderSuccess(DetailView):
         context = super().get_context_data(**kwargs)
         if self.request.user.is_anonymous:
             return context
-        else:
+        if self.request.user.is_authenticated:
             if self.object.cart.user.pk == self.request.user.pk:
                 return context
 

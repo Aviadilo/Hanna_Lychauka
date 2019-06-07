@@ -11,6 +11,7 @@ from order.forms import CheckOutOrderForm
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from books.views import book_quantity_in_cart
 
 new_order_status = OrderStatus.objects.get(pk=1)  # у объекта с pk=1 лежит значение "Новый заказ"
 
@@ -42,6 +43,7 @@ class AddBookToCart(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['next'] = self.request.GET.get('next', '/')
+        book_quantity_in_cart(self, context)
         return context
 
     def get_success_url(self):
@@ -74,6 +76,7 @@ class CartView(DetailView):
         checkout_form.fields['cart'].initial = self.object
         checkout_form.fields['status'].initial = new_order_status
         context['form'] = checkout_form
+        book_quantity_in_cart(self, context)
         return context
 
 
@@ -89,6 +92,11 @@ class CartUserList(LoginRequiredMixin, ListView):
     model = Cart
     template_name = 'cart/cart_user_list.html'
     login_url = '/auth/login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        book_quantity_in_cart(self, context)
+        return context
 
     def get_queryset(self, **kwargs):
         qs = super().get_queryset(**kwargs)
