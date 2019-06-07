@@ -55,8 +55,7 @@ class OrderCanceled(UpdateView):
     def get_success_url(self):
         self.object.canceled = True
         self.object.save()
-        return reverse_lazy('cart-user-list')
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
+        if self.request.user.is_authenticated:
+            return reverse_lazy('cart-user-list')
+        if self.request.user.is_anonymous:
+            return reverse_lazy('book-list-view')

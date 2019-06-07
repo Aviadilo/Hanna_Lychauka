@@ -4,8 +4,8 @@ from django.urls import reverse
 
 class Author(models.Model):
     first_name = models.CharField("Фамилия", null=False, blank=False, max_length=30)
-    last_name = models.CharField("Имя", null=True, blank=True, max_length=30)
-    country = models.CharField("Страна", null=True, blank=True, max_length=20)
+    last_name = models.CharField("Имя", null=True, blank=True, max_length=30, default=' ')
+    country = models.CharField("Страна", null=True, blank=True, max_length=20, default=' ')
 
     def __str__(self):  # что происходит, если объект выводят на печать
         full_name = self.last_name + " " + self.first_name

@@ -35,7 +35,7 @@ class BookList(ListView):
         search = self.request.GET.get('search_book', 0)
         if qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct().exists():
             return qs.filter(Q(name__icontains=search) | Q(author__first_name__icontains=search)).distinct()
-        return qs
+        return qs.order_by('name')
 
 
 class BookDetail(DetailView):
