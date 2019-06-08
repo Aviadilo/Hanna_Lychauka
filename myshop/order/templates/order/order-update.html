@@ -15,6 +15,9 @@
 <div class="container">
     <h2>{{ object }}</h2>
     <h3>{{ object.cart }}</h3>
+    {% if object.canceled %}
+        <h2 class="text-danger font-weight-bold">ОТМЕНЕН</h2>
+    {% endif %}
 
     {% if perms.books.edit_order %}
         <div class="update_order_form">

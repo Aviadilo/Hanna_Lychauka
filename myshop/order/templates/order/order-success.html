@@ -22,7 +22,7 @@
             {% for product in  object.cart.user_cart.all%}
                     <tr>
                         <td>
-                            {{ product.book.name }}
+                            <a href="{% url 'book-detail-view' product.book.pk %}">{{ product.book.name }}</a>
                         </td>
                         <td>
                             {% for author_name in product.book.author.all %}

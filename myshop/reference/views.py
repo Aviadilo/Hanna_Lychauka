@@ -121,7 +121,7 @@ class AuthorList(ListView):
         if qs.filter(first_name__icontains=search).exists():
             return qs.filter(first_name__icontains=search)
         else:
-            return qs
+            return qs.order_by('first_name')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -140,7 +140,7 @@ class GenreList(ListView):
         if qs.filter(name__icontains=search).exists():
             return qs.filter(name__icontains=search)
         else:
-            return qs
+            return qs.order_by('name')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -159,7 +159,7 @@ class SerieList(ListView):
         if qs.filter(name__icontains=search).exists():
             return qs.filter(name__icontains=search)
         else:
-            return qs
+            return qs.order_by('name')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -178,7 +178,7 @@ class PublishList(ListView):
         if qs.filter(name__icontains=search).exists():
             return qs.filter(name__icontains=search)
         else:
-            return qs
+            return qs.order_by('name')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -197,7 +197,7 @@ class BindingList(ListView):
         if qs.filter(binding_type__icontains=search).exists():
             return qs.filter(binding_type__icontains=search)
         else:
-            return qs
+            return qs.order_by('binding_type')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -216,7 +216,7 @@ class BookFormatList(ListView):
         if qs.filter(size__icontains=search).exists():
             return qs.filter(size__icontains=search)
         else:
-            return qs
+            return qs.order_by('size')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

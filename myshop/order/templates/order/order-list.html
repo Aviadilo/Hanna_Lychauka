@@ -29,7 +29,10 @@
                         {{ object.cart.user }}
                     </td>
                     <td>
-                        {{ object.status }}
+                        {{ object.status }}<br>
+                        {% if object.canceled %}
+                            <p class="text-danger font-weight-bold">ОТМЕНЕН</p>
+                        {% endif %}
                     </td>
                     <td>
                         {{ object.cart.books_in_cart_count }}
